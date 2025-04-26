@@ -1,0 +1,36 @@
+https://discord.com/oauth2/authorize?client_id=1362555246550847690&permissions=1756744656612560&integration_type=0&scope=bot
+
+logic:
+
+bot that allows you to stop/start tourneys
+
+tourney info stored in tourney.json
+
+{
+    "active": false,
+    "name": "test tourney",
+    "rewards": [
+        "firstPlaceRole",
+        "secondPlaceRole",
+        "thirdPlaceRole"
+        ],
+    "startDate": "MM-DD-YYYY",
+    'color': "4353",
+    "image": "https://imgur.com/test-tourney-image",
+    "users": {
+        "merlinmdv": 0,
+        "otisbucketman888": 100,
+        "digger": 200
+    }
+}
+
+commands:
+
+/start - opens form to create new tourney (admin)
+/end - ends tourney and distributes rewards (admin)
+/status - view current reward recipients and start date (admin)
+/leaderboard - view leaderboard (user)
+/points add <amount> <user> - add <amount> points to <user> (admin)
+/points remove <amount> <user> - remove <amount> points from <user> (admin)
+/points view <user> - view points of user
+

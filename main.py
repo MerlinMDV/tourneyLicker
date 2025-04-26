@@ -16,8 +16,8 @@ client = lightbulb.client_from_app(bot)
 bot.subscribe(hikari.StartingEvent, client.start)
 
 # initialize admin and guild ids
-tourneyLickerAdmin = 1365499388625031190
-server = 1193697018359599255
+tourneyLickerAdmin = int(os.getenv("ADMIN"))
+server = int(os.getenv("SERVER"))
 
 # initialize hooks
 

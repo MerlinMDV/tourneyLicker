@@ -129,12 +129,14 @@ class Info(
         usernames = list(sortUsers(tourney["users"]).keys())
         tourneyInfo = hikari.Embed(title= f"{tourney["name"]} info", color= tourney["color"])
         tourneyInfo.add_field("Started:", tourney["startDate"])
+        leader = await bot.rest.fetch_user(usernames[0])
+        runnerup = await bot.rest.fetch_user(usernames[1])
         try:
-            tourneyInfo.add_field("Current leader:", usernames[0])
+            tourneyInfo.add_field("Current leader:", str(leader))
         except:
             print("no winner")
         try:
-            tourneyInfo.add_field(("Current runner-up:"), usernames[1])
+            tourneyInfo.add_field(("Current runner-up:"), str(runnerup))
         except:
             print("no runner up")
         await ctx.respond(tourneyInfo)

@@ -57,10 +57,8 @@ def modPoints(usr, amt):
     saveTourney(tourney)
     
 def setPoints(usr, x):
-    points = getPoints(usr)
-    points = x
     tourney = getTourney()
-    tourney["users"][usr] = points
+    tourney["users"][usr] = x
     saveTourney(tourney)
 
 def sortUsers(usrs):
@@ -127,7 +125,7 @@ class Set(
 class View(
     lightbulb.SlashCommand,
     name = "view",
-    description = "View peoples points",
+    description = "View people's points",
     hooks=[tourneyCommand]
 ):
     user = lightbulb.user("user", "User you're gonna look at")

@@ -55,6 +55,13 @@ def modPoints(usr, amt):
     tourney = getTourney()
     tourney["users"][usr] = points
     saveTourney(tourney)
+    
+def setPoints(usr, x):
+    points = getPoints(usr)
+    points = x
+    tourney = getTourney()
+    tourney["users"][usr] = points
+    saveTourney(tourney)
 
 def sortUsers(usrs):
     usrs = dict(sorted(usrs.items(), key=lambda x: x[1], reverse=True))
@@ -101,6 +108,20 @@ class Remove(
     async def invoke(self, ctx: lightbulb.Context) -> None:
         modPoints(str(self.user.id), -(abs(self.amount)))
         await ctx.respond(f"Successfully removed {self.amount} point(s) from {self.user}.",flags=hikari.MessageFlag.EPHEMERAL)
+
+@points.register()
+class Set(
+    lightbulb.SlashCommand,
+    name = "set",
+    description = "Set people's points",
+    hooks=[lightbulb.prefab.checks.has_roles(tourneyLickerAdmin), tourneyCommand]
+):
+    amount = lightbulb.integer("amount", "Amount of points to set")
+    user = lightbulb.user("user", "User to set points")
+    @lightbulb.invoke
+    async def invoke(self, ctx: lightbulb.Context) -> None:
+        setPoints(str(self.user.id), self.amount)
+        await ctx.respond(f"Successfully set {self.user}'s points to {self.amount}.",flags=hikari.MessageFlag.EPHEMERAL)
 
 @points.register()
 class View(
